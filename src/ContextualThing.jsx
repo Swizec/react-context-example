@@ -1,17 +1,18 @@
 import React from "react";
 
-import LockToggle from "./LockToggle";
+import LockToggle, { ToggleRow } from "./LockToggle";
 import LockContext from "./LockContext";
 import { Table, Row, Cell } from "./Table";
 
 class ContextualThing extends React.Component {
     state = {
-        locked: false,
-        toggleLock: () =>
-            this.setState({
-                locked: !this.state.locked
-            })
+        locked: false
     };
+
+    toggleLock = () =>
+        this.setState({
+            locked: !this.state.locked
+        });
 
     render() {
         const { locked } = this.state;
@@ -19,22 +20,14 @@ class ContextualThing extends React.Component {
         return (
             <div>
                 <p> This is a lock </p>
-                <p>{locked ? <b>Locked!</b> : "Open"}</p>
-                <LockContext.Provider value={this.state}>
+                <p style={{ fontSize: "2em" }}>
+                    {locked ? <b>Locked!</b> : "Open"}
+                </p>
+                <LockContext.Provider
+                    value={{ locked, toggleLock: this.toggleLock }}
+                >
                     <Table>
-                        <Row>
-                            <Cell>
-                                <LockToggle />
-                            </Cell>
-                        </Row>
-                        <Row>
-                            <Cell>
-                                <LockToggle />
-                            </Cell>
-                            <Cell>
-                                <LockToggle />
-                            </Cell>
-                        </Row>
+                        {[1, 2, 3, 2, 1].map(n => <ToggleRow n={n} />)}
                     </Table>
                 </LockContext.Provider>
             </div>

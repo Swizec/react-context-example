@@ -1,6 +1,7 @@
 import React from "react";
 
 import LockContext from "./LockContext";
+import { Cell, Row } from "./Table";
 
 const LockToggle = () => (
     <LockContext.Consumer>
@@ -12,4 +13,15 @@ const LockToggle = () => (
     </LockContext.Consumer>
 );
 
+const ToggleRow = ({ n }) => (
+    <Row>
+        {new Array(n).fill(0).map(_ => (
+            <Cell>
+                <LockToggle />
+            </Cell>
+        ))}
+    </Row>
+);
+
 export default LockToggle;
+export { ToggleRow };
