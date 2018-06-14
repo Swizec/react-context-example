@@ -5,7 +5,9 @@ import LockContext from "./LockContext";
 const LockToggle = () => (
     <LockContext.Consumer>
         {({ locked, toggleLock }) => (
-            <button onClick={toggleLock}>{locked ? "Unlock" : "Lock"}</button>
+            <button onClick={toggleLock} style={{ fontSize: "1.5em" }}>
+                {locked ? "Unlock" : "Lock"}
+            </button>
         )}
     </LockContext.Consumer>
 );
